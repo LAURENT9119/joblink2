@@ -1,4 +1,3 @@
-
 import { Switch, Route, Redirect } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,6 +22,7 @@ import Contact from "@/pages/contact";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
 import ResetPassword from "@/pages/reset-password";
+import HelpPage from "@/pages/help-page";
 
 function App() {
   return (
@@ -47,6 +47,7 @@ function App() {
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
               <Route path="/reset-password" component={ResetPassword} />
+              <Route path="/help" component={HelpPage} />
               <Route component={NotFound} />
             </Switch>
           </TooltipProvider>

@@ -19,7 +19,7 @@ import { useState } from "react";
 
 export function Header() {
   const { t } = useTranslation();
-  const { user, logoutMutation } = useAuth();
+  const { user } = useAuth();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -88,8 +88,7 @@ export function Header() {
                 
                 <DropdownMenuSeparator />
                 <DropdownMenuItem 
-                  onClick={() => logoutMutation.mutate()}
-                  disabled={logoutMutation.isPending}
+                  onClick={() => {}}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
                   {t("auth.logout")}
