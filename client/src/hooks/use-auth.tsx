@@ -1,7 +1,4 @@
-` tags. I will also ensure that the indentation and structure of the code are preserved.
 
-```
-<replit_final_file>
 import { createContext, ReactNode, useContext, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useLocation } from "wouter";
