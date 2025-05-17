@@ -422,4 +422,5 @@ const translations = {
   }
 };
 
+export const fr = translations;
 export default translations;

@@ -194,4 +194,5 @@ const translations = {
   }
 };
 
+export const en = translations;
 export default translations;

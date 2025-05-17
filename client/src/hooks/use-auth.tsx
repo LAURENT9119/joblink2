@@ -1,6 +1,7 @@
 
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import React from 'react';
 
 interface AuthState {
   user: any | null;
@@ -75,3 +76,7 @@ export const useAuth = create<AuthState>()(
     }
   )
 );
+
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return <>{children}</>;
+};
