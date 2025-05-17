@@ -1,0 +1,205 @@
+
+🧾 III. STRUCTURE DES PAGES ET INTERFACES
+1. Accueil (Landing Page)
+✅ Présentation rapide de l'application
+
+Boutons :
+
+Se connecter
+
+Créer un compte
+
+Publier une mission
+
+Trouver un emploi
+
+Bandeau multilingue (🇫🇷 / WO) avec bouton de bascule
+
+Vidéo ou animation expliquant le concept
+
+2. Authentification (login/signup/reset password)
+Connexion
+
+Email / téléphone + mot de passe
+
+Auth via OTP possible (Supabase le gère)
+
+Inscription
+
+Choix : Je suis chercheur d'emploi / Je propose des missions
+
+Nom, prénom
+
+Téléphone ou email
+
+Mot de passe
+
+Langue préférée
+
+Mot de passe oublié
+
+3. Tableau de bord (Dashboard Utilisateur)
+Différent selon le rôle :
+
+a) Candidat
+Profil (infos personnelles, expériences, compétences, zone géographique, audio de présentation)
+
+Mes candidatures envoyées
+
+Offres recommandées
+
+CV généré automatiquement (PDF ou HTML)
+
+Bouton “Chercher un emploi”
+
+b) Employeur / Proposeur de mission
+Profil pro ou particulier
+
+Mes annonces
+
+Candidatures reçues
+
+Publier une nouvelle mission
+
+Notifications (SMS ou email ou WhatsApp)
+
+4. Créer un Profil (Candidat)
+Infos :
+
+Nom, prénom
+
+Localisation (ville, quartier)
+
+Âge (optionnel)
+
+Domaines souhaités (multi-sélection : artisanat, babysitting, etc.)
+
+Compétences
+
+Audio de présentation (enregistrement via micro du téléphone)
+
+Photo de profil (optionnel)
+
+Génération automatique de CV simplifié depuis le profil
+
+5. Publier une Mission (Proposeur)
+Titre
+
+Description
+
+Type : Mission ponctuelle / CDD / Service
+
+Secteur : agriculture, service, artisan, etc.
+
+Localisation
+
+Moyen de contact : téléphone / WhatsApp / email
+
+Date de disponibilité
+
+Durée (si applicable)
+
+Bouton "Publier" (stocké dans Supabase, notification aux candidats proches)
+
+6. Recherche d’emploi / missions
+Filtres :
+
+Par secteur
+
+Par localisation
+
+Type de contrat
+
+Langue souhaitée
+
+Résultats affichés sous forme de cartes :
+
+Titre de l’offre
+
+Localisation
+
+Type
+
+Bouton "Contacter"
+
+Tri par proximité ou nouveauté
+
+7. Fiche mission / offre
+Affichage détaillé :
+
+Description
+
+Secteur
+
+Type
+
+Profil recherché
+
+Boutons :
+
+📞 Appeler
+
+💬 WhatsApp
+
+🤝 Postuler (si connecté)
+
+Audio description en langue locale (pour non-lecteurs)
+
+8. Fiche métier simplifiée
+Page expliquant :
+
+Description du métier
+
+Compétences de base
+
+Salaire moyen (indicatif)
+
+Exemple de missions
+
+Accessible depuis le menu ou en suggestion
+
+9. Multilingue / accessibilité
+Traduction complète FR + WO (Wolof ou autre)
+
+Activation audio (Text-to-Speech Google API)
+
+Bouton 🔊 sur chaque texte important pour lire à voix haute
+
+10. Notifications
+SMS via API (Twilio ou Supabase + webhook) : nouveau message / nouvelle mission / candidature reçue
+
+Email ou WhatsApp en option
+
+11. Admin Panel (Backoffice simplifié)
+Gestion des utilisateurs
+
+Vérification des signalements
+
+Blocage d’abus ou faux comptes
+
+Analyse de trafic et rapports
+
+📱 IV. FLUX UTILISATEURS
+➤ Parcours Candidat :
+Inscription / Connexion
+
+Création de profil
+
+Navigation / Recherche de missions
+
+Visualisation d’une mission
+
+Candidature ou appel
+
+Suivi des candidatures
+
+➤ Parcours Proposeur :
+Inscription / Connexion
+
+Création de profil rapide
+
+Publication d’une mission
+
+Suivi des candidats intéressés
+
+Prise de contact directe
