@@ -22,10 +22,18 @@ import Privacy from "./pages/privacy";
 import ResetPassword from "./pages/reset-password";
 
 function Router() {
+  const { user } = useAuth();
+  
   return (
     <Switch>
       <Route path="/" component={HomePage} />
-      <Route path="/auth" component={AuthPage} />
+      <Route path="/auth">
+        {user ? (
+          <Redirect to={user.role === "job_seeker" ? "/job-seeker/dashboard" : "/employer/dashboard"} />
+        ) : (
+          <AuthPage />
+        )}
+      </Route>
       
       {/* Job Seeker Routes */}
       <ProtectedRoute path="/job-seeker/dashboard" component={JobSeekerDashboard} />

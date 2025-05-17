@@ -41,11 +41,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: User) => {
       queryClient.setQueryData(["/api/user"], user);
       
+      const [, setLocation] = useLocation();
+      
       // Redirect based on user role
       if (user.role === "job_seeker") {
-        window.location.href = "/job-seeker/dashboard";
+        setLocation("/job-seeker/dashboard");
       } else if (user.role === "employer") {
-        window.location.href = "/employer/dashboard";
+        setLocation("/employer/dashboard");
       }
       
       toast({

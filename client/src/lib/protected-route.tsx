@@ -18,9 +18,9 @@ export function ProtectedRoute({
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
         </div>
       ) : !user ? (
-        <Redirect to="/auth?from=protected" />
+        <Redirect to="/auth" />
       ) : (
-        <Component />
+        <Component key={path} />
       )}
     </Route>
   );
