@@ -182,6 +182,21 @@ const translations = {
       startSaving: "Start saving jobs you're interested in to apply later",
       browseJobs: "Browse Jobs"
     },
+    search: {
+      title: "Find Jobs",
+      subtitle: "Search and filter job opportunities near you",
+      audioDescription: "This is the job search page. Use the filters to find jobs by sector, location, type, and language preference. The results will be displayed below.",
+      sector: "Sector",
+      selectSector: "Select a sector",
+      location: "Location",
+      locationPlaceholder: "City, neighborhood...",
+      type: "Job type",
+      selectType: "Select a type",
+      language: "Preferred language",
+      selectLanguage: "Select a language",
+      noJobs: "No jobs found",
+      tryAdjusting: "Try adjusting your filters to see more results"
+    },
     dashboard: {
       hello: "Hello, {name}!",
       welcome: "Welcome to your dashboard. What would you like to do today?",
