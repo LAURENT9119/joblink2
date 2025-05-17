@@ -1,7 +1,7 @@
 
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface AuthState {
   user: any | null;
