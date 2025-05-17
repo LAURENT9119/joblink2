@@ -78,5 +78,23 @@ export const useAuth = create<AuthState>()(
 );
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <>{children}</>;
+  const [user, setUser] = useState<User | null>(null);
+
+  const login = async (username: string, password: string) => {
+    // Implement login logic
+    return { success: true };
+  };
+
+  const register = async (data: any) => {
+    // Implement register logic
+    return { success: true };
+  };
+
+  const value = {
+    user,
+    login,
+    register,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

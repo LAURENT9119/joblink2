@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { useLocation, useSearch, Link } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
@@ -57,7 +58,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function AuthPage() {
   const { t } = useTranslation();
-  const { user, login } = useAuth();
+  const { user, login, register } = useAuth();
   const [location, setLocation] = useLocation();
   
   const loginMutation = useMutation({
@@ -133,6 +134,23 @@ export default function AuthPage() {
       password: data.password,
     });
   };
+
+  const registerMutation = useMutation({
+    mutationFn: (data: RegisterFormValues) => register(data),
+    onSuccess: () => {
+      toast({
+        title: t("auth.registerSuccess"),
+        description: t("auth.accountCreated"),
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: t("auth.registerError"),
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
 
   const onRegisterSubmit = (data: RegisterFormValues) => {
     // Remove terms field as it's not needed in the API
