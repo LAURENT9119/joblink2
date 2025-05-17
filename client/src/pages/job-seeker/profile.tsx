@@ -253,12 +253,21 @@ export default function JobSeekerProfile() {
                   {t("jobSeeker.profile.audioPresentationTip")}
                 </p>
 
-                <AudioRecorder 
-                  onRecordingComplete={(blob) => {
-                    // Handle audio recording
-                    console.log(blob);
-                  }}
-                />
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <AudioRecorder
+                      onRecordingComplete={(blob) => {
+                        // Handle audio blob upload
+                      }}
+                    />
+                    <span className="text-sm text-muted-foreground">
+                      {t("profile.recordAudioPresentation")}
+                    </span>
+                  </div>
+                  <Button type="submit" className="w-full">
+                    {t("common.save")}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>

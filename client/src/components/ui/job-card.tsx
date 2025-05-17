@@ -19,7 +19,12 @@ interface JobCardProps {
   job: Job | JobWithEmployer;
   isSaved?: boolean;
   isDetailed?: boolean;
+  showAudio?: boolean;
 }
+
+const generateAudioDescription = (job: Job | JobWithEmployer) => {
+  return `${job.title}. ${job.description}. Location: ${job.location}. Type: ${job.type}`;
+};
 
 export function JobCard({ job, isSaved = false, isDetailed = false }: JobCardProps) {
   const { t, language } = useTranslation();
