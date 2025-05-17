@@ -55,8 +55,25 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 
 export default function AuthPage() {
   const { t } = useTranslation();
-  const { user, loginMutation, registerMutation } = useAuth();
+  const { user, login } = useAuth();
   const [location, setLocation] = useLocation();
+  
+  const loginMutation = useMutation({
+    mutationFn: (data: LoginFormValues) => login(data.username, data.password),
+    onSuccess: () => {
+      toast({
+        title: t("auth.loginSuccess"),
+        description: t("auth.welcomeBack"),
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: t("auth.loginError"),
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
   const search = useSearch();
   const [activeTab, setActiveTab] = useState<string>("login");
 
