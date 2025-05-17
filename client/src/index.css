@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 140 70% 45%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 340 82% 58%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  
+  --chart-1: 206 100% 50%;
+  --chart-2: 340 82% 58%;
+  --chart-3: 140 70% 45%;
+  --chart-4: 45 93% 58%;
+  --chart-5: 262 70% 65%;
+  
+  --sidebar-background: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 140 70% 45%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 240 3.7% 15.9%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 140 70% 45%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 340 82% 58%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans bg-background text-foreground antialiased;
+  }
+}
+
+.audio-wave {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.audio-wave span {
+  width: 3px;
+  height: 8px;
+  background-color: hsl(var(--primary));
+  border-radius: 3px;
+  animation: audio-wave 1s infinite ease-in-out;
+}
+
+.audio-wave span:nth-child(2) {
+  animation-delay: 0.1s;
+  height: 16px;
+}
+
+.audio-wave span:nth-child(3) {
+  animation-delay: 0.2s;
+  height: 24px;
+}
+
+.audio-wave span:nth-child(4) {
+  animation-delay: 0.3s;
+  height: 16px;
+}
+
+.audio-wave span:nth-child(5) {
+  animation-delay: 0.4s;
+  height: 8px;
+}
+
+@keyframes audio-wave {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.2);
+  }
+}
