@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
 import { Header } from "@/components/layout/header";
@@ -137,6 +137,7 @@ export default function JobSeekerDashboard() {
   };
 
   const missing = missingProfileItems();
+  const [, navigate] = useLocation();
 
   return (
     <div className="min-h-screen flex flex-col bg-muted">
