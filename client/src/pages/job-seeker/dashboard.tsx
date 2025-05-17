@@ -292,3 +292,216 @@ export default function JobSeekerDashboard() {
     </div>
   );
 }
+```
+
+The edited code snippet seems to provide a simplified version of the dashboard. I need to carefully examine it and integrate its structure and content into the original code while preserving the functionalities present in the original code. This includes fetching data, profile completion logic, and handling missing profile items. I'll use the edited snippet as a base for the overall layout and structure, but keep the data fetching and other logic from the original file.
+
+```typescript
+import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
+import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "@/hooks/use-translation";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { MobileNavbar } from "@/components/layout/mobile-navbar";
+import { JobCard } from "@/components/ui/job-card";
+import { AudioButton } from "@/components/ui/audio-button";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Job, Application } from "@shared/schema";
+import { Loader2, User, Forward, Bookmark, Mic, Briefcase, GraduationCap } from "lucide-react";
+
+export default function JobSeekerDashboard() {
+  const { t } = useTranslation();
+  const { user } = useAuth();
+
+  // Get recommended jobs
+  const {
+    data: recommendedJobs,
+    isLoading: isJobsLoading
+  } = useQuery<Job[]>({
+    queryKey: ["/api/jobs"],
+    enabled: !!user,
+  });
+
+  // Get user applications
+  const {
+    data: applications,
+    isLoading: isApplicationsLoading
+  } = useQuery<(Application & { job: Job })[]>({
+    queryKey: ["/api/job-seeker/applications"],
+    enabled: !!user,
+  });
+
+  // Get saved jobs count
+  const {
+    data: savedJobs,
+    isLoading: isSavedJobsLoading
+  } = useQuery<(Application & { job: Job })[]>({
+    queryKey: ["/api/job-seeker/saved-jobs"],
+    enabled: !!user,
+  });
+
+  // Audio description for the dashboard
+  const welcomeAudio = t("jobSeeker.dashboard.welcomeAudio", {
+    name: user?.firstName || ""
+  });
+
+  // Get profile completion percentage
+  const getProfileCompletion = () => {
+    if (!user || !user.jobSeekerProfile) return 0;
+
+    const profile = user.jobSeekerProfile;
+    let completed = 0;
+    let total = 0;
+
+    // Basic info
+    if (user.firstName) completed++;
+    if (user.lastName) completed++;
+    if (user.phone) completed++;
+    total += 3;
+
+    // Profile info
+    if (profile.location) completed++;
+    if (profile.skills && profile.skills.length > 0) completed++;
+    if (profile.desiredSectors && profile.desiredSectors.length > 0) completed++;
+    if (profile.audioPresentationUrl) completed++;
+    if (profile.profilePhotoUrl) completed++;
+    if (profile.experience) completed++;
+    total += 6;
+
+    return Math.round((completed / total) * 100);
+  };
+
+  const profileCompletionPercentage = getProfileCompletion();
+
+  // Check if there are required fields to complete
+  const missingProfileItems = () => {
+    if (!user || !user.jobSeekerProfile) return [];
+
+    const profile = user.jobSeekerProfile;
+    const missing = [];
+
+    if (!profile.audioPresentationUrl) missing.push({
+      id: "audio",
+      icon: <Mic className="h-4 w-4" />,
+      name: t("jobSeeker.profile.audioPresentation")
+    });
+
+    if (!profile.experience) missing.push({
+      id: "experience",
+      icon: <Briefcase className="h-4 w-4" />,
+      name: t("jobSeeker.profile.experience")
+    });
+
+    if (!profile.skills || profile.skills.length === 0) missing.push({
+      id: "skills",
+      icon: <GraduationCap className="h-4 w-4" />,
+      name: t("jobSeeker.profile.skills")
+    });
+
+    return missing;
+  };
+
+  const missing = missingProfileItems();
+
+  return (
+    <div className="min-h-screen flex flex-col bg-muted">
+      <Header />
+
+      <main className="flex-grow py-8">
+        <div className="container mx-auto px-4">
+          <div className="mb-6 flex items-center">
+            <h1 className="text-2xl font-bold">{t("jobSeeker.dashboard.hello", { name: user?.firstName || "" })}</h1>
+            <AudioButton text={welcomeAudio} className="ml-2" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Profile Completion */}
+            <Card className="p-6">
+              <h2 className="font-semibold mb-2">{t("jobSeeker.dashboard.profileCompleted")}</h2>
+              <div className="mb-4 bg-gray-200 rounded-full h-2">
+                <div className="bg-primary h-2 rounded-full" style={{width: `${profileCompletionPercentage}%`}}></div>
+              </div>
+              <Link href="/job-seeker/profile">
+                <Button variant="outline" className="w-full">
+                  {t("jobSeeker.dashboard.completeProfile")}
+                </Button>
+              </Link>
+            </Card>
+
+            {/* Applications */}
+            <Card className="p-6">
+              <h2 className="font-semibold mb-4">{t("jobSeeker.dashboard.applications")}</h2>
+              <div className="space-y-2">
+                <p>
+                  {isApplicationsLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : applications && applications.length > 0 ? (
+                    t("jobSeeker.dashboard.lastApplication", { date: "2 days ago" })
+                  ) : (
+                    t("jobSeeker.dashboard.noApplications")
+                  )}
+                </p>
+              </div>
+            </Card>
+
+            {/* Recommended Jobs */}
+            <Card className="p-6">
+              <h2 className="font-semibold mb-4">{t("jobSeeker.dashboard.recommendedJobs")}</h2>
+              <p>{t("jobSeeker.dashboard.matchingJobs", { count: 5 })}</p>
+              <Link href="/job-seeker/search">
+                <Button className="w-full mt-4">
+                  {t("home.hero.findJob")}
+                </Button>
+              </Link>
+            </Card>
+          </div>
+
+           {/* Complete Your Profile */}
+           {missing.length > 0 && (
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h2 className="text-lg font-semibold text-foreground">{t("jobSeeker.dashboard.completeProfile")}</h2>
+                    <p className="text-muted-foreground text-sm">{t("jobSeeker.dashboard.completeProfileDesc")}</p>
+                  </div>
+                  <AudioButton
+                    text={t("jobSeeker.dashboard.completeProfileAudio")}
+                    size="sm"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  {missing.map((item) => (
+                    <div key={item.id} className="flex items-center justify-between p-3 border border-border rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center text-muted-foreground">
+                          {item.icon}
+                        </div>
+                        <span className="text-foreground">{item.name}</span>
+                      </div>
+                      <Button variant="link" asChild>
+                        <Link href="/job-seeker/profile">
+                          {t("common.add")}
+                        </Link>
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </main>
+
+      <MobileNavbar />
+
+      <Footer />
+    </div>
+  );
+}
+`
