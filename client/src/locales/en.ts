@@ -200,6 +200,20 @@ const translations = {
         stopRecording: "Stop recording",
         audioNotSupported: "Your browser does not support audio playback"
       },
+    applications: {
+      title: "My Applications",
+      subtitle: "Track the status of your job applications",
+      audioDescription: "This is your applications page. Here you can see all the jobs you have applied for and their current status.",
+      noApplications: "No applications yet",
+      startApplying: "Start applying for jobs to see them here",
+      browseJobs: "Browse Jobs",
+      status: {
+        pending: "Pending",
+        accepted: "Accepted",
+        rejected: "Rejected",
+        interview: "Interview scheduled"
+      }
+    },
     savedJobs: {
       title: "Saved Jobs",
       subtitle: "View and manage your saved job opportunities",
