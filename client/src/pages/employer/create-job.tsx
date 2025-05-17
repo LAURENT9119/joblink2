@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 export default function CreateJob() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useLocation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { register, handleSubmit, formState: { errors } } = useForm();

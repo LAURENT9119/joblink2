@@ -32,12 +32,12 @@ export default function Candidates() {
   const { user } = useAuth();
   const [location] = useLocation();
   const search = useSearch();
-  
+
   // Parsing URL parameters
   const params = new URLSearchParams(search);
   const jobIdParam = params.get("job");
   const applicationIdParam = params.get("application");
-  
+
   // States for filtering and searching
   const [searchTerm, setSearchTerm] = useState("");
   const [filterJob, setFilterJob] = useState<number | null>(jobIdParam ? parseInt(jobIdParam) : null);
@@ -45,7 +45,7 @@ export default function Candidates() {
   const [selectedCandidate, setSelectedCandidate] = useState<number | null>(
     applicationIdParam ? parseInt(applicationIdParam) : null
   );
-  
+
   // Get employer jobs
   const { 
     data: jobs, 
@@ -54,7 +54,7 @@ export default function Candidates() {
     queryKey: ["/api/employer/jobs"],
     enabled: !!user,
   });
-  
+
   // Get applications
   const { 
     data: applications, 
@@ -63,35 +63,35 @@ export default function Candidates() {
     queryKey: ["/api/employer/applications"],
     enabled: !!user,
   });
-  
+
   // Audio description
   const candidatesAudio = t("employer.candidates.audioDescription");
-  
+
   // Filter applications based on search term and filters
   const filteredApplications = applications?.filter(app => {
     // Filter by job if selected
     if (filterJob && app.job.id !== filterJob) return false;
-    
+
     // Filter by status if selected
     if (filterStatus !== "all" && app.status !== filterStatus) return false;
-    
+
     // Search term filtering
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       const candidateName = `${app.jobSeeker.firstName} ${app.jobSeeker.lastName}`.toLowerCase();
       const jobTitle = app.job.title.toLowerCase();
-      
+
       return candidateName.includes(term) || jobTitle.includes(term);
     }
-    
+
     return true;
   });
-  
+
   // Get selected application details
   const selectedApplication = selectedCandidate
     ? applications?.find(app => app.id === selectedCandidate)
     : null;
-  
+
   // Format application date
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString(undefined, {
@@ -100,11 +100,11 @@ export default function Candidates() {
       day: 'numeric'
     });
   };
-  
+
   return (
     <div className="min-h-screen flex flex-col bg-muted">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-6 flex-grow pb-20 md:pb-6">
         <div className="flex items-center mb-6">
           <Button variant="ghost" size="sm" asChild className="mr-2">
@@ -120,7 +120,7 @@ export default function Candidates() {
             />
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Column - List of Candidates */}
           <div className="lg:col-span-1 space-y-4">
@@ -137,7 +137,7 @@ export default function Candidates() {
                       className="pl-9"
                     />
                   </div>
-                  
+
                   <div className="flex gap-2">
                     <Select
                       value={filterJob ? String(filterJob) : "all"}
@@ -155,7 +155,7 @@ export default function Candidates() {
                         ))}
                       </SelectContent>
                     </Select>
-                    
+
                     <Select
                       value={filterStatus}
                       onValueChange={(value) => setFilterStatus(value)}
@@ -172,7 +172,7 @@ export default function Candidates() {
                     </Select>
                   </div>
                 </div>
-                
+
                 {/* List of candidates */}
                 <div className="space-y-3 max-h-[700px] overflow-y-auto pr-2">
                   {isApplicationsLoading ? (
@@ -231,7 +231,7 @@ export default function Candidates() {
               </CardContent>
             </Card>
           </div>
-          
+
           {/* Right Column - Candidate Details */}
           <div className="lg:col-span-2">
             {selectedApplication ? (
@@ -258,7 +258,7 @@ export default function Candidates() {
                         {t(`employer.candidates.${selectedApplication.status}`)}
                       </Badge>
                     </div>
-                    
+
                     <div className="flex items-center gap-2 mt-3 text-sm text-muted-foreground">
                       <ClockIcon className="h-4 w-4" />
                       <span>
@@ -266,25 +266,25 @@ export default function Candidates() {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="mb-6">
                     <SectionHeading 
                       title={t("employer.candidates.candidateProfile")}
                       description={t("employer.candidates.candidateProfileDesc")}
                     />
-                    
+
                     <ProfileCard
                       user={selectedApplication.jobSeeker as any}
                       isDetailed={true}
                     />
                   </div>
-                  
+
                   <div className="mb-6">
                     <SectionHeading 
                       title={t("employer.candidates.jobDetails")}
                       description={t("employer.candidates.jobDetailsDesc")}
                     />
-                    
+
                     <div className="border border-border rounded-lg p-4">
                       <h3 className="font-medium text-foreground mb-2">{selectedApplication.job.title}</h3>
                       <p className="text-muted-foreground text-sm mb-3">{selectedApplication.job.description}</p>
@@ -317,7 +317,7 @@ export default function Candidates() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="border-t border-border pt-6">
                     <div className="flex flex-wrap gap-3">
                       {selectedApplication.status === "pending" && (
@@ -332,7 +332,7 @@ export default function Candidates() {
                           </Button>
                         </>
                       )}
-                      
+
                       <Button asChild variant="outline" className="gap-2">
                         <a href={`https://wa.me/${selectedApplication.jobSeeker.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -342,7 +342,7 @@ export default function Candidates() {
                           {t("contact.contactWhatsapp")}
                         </a>
                       </Button>
-                      
+
                       <Button asChild variant="outline" className="gap-2">
                         <a href={`tel:${selectedApplication.jobSeeker.phone.replace(/\D/g, '')}`}>
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -369,9 +369,9 @@ export default function Candidates() {
           </div>
         </div>
       </main>
-      
+
       <MobileNavbar />
-      
+
       <Footer />
     </div>
   );

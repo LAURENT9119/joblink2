@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRoute, Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/use-auth";
 import { useTranslation } from "@/hooks/use-translation";
@@ -23,7 +23,7 @@ export default function JobDetail() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const [, params] = useRoute<{ id: string }>("/job-seeker/job/:id");
-  
+
   if (!params) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-muted">
@@ -35,9 +35,9 @@ export default function JobDetail() {
       </div>
     );
   }
-  
+
   const jobId = parseInt(params.id);
-  
+
   // Get job details
   const { 
     data: job, 
@@ -46,7 +46,7 @@ export default function JobDetail() {
   } = useQuery<JobWithEmployer>({
     queryKey: [`/api/jobs/${jobId}`],
   });
-  
+
   // Check if job is saved
   const { 
     data: savedJobs, 
@@ -55,9 +55,9 @@ export default function JobDetail() {
     queryKey: ["/api/job-seeker/saved-jobs"],
     enabled: !!user,
   });
-  
+
   const isSaved = !isSavedJobsLoading && savedJobs?.some(saved => saved.jobId === jobId);
-  
+
   // Get similar jobs
   const { 
     data: similarJobs, 
@@ -66,10 +66,10 @@ export default function JobDetail() {
     queryKey: ["/api/jobs", job?.sector],
     enabled: !!job,
   });
-  
+
   // Filter out current job and limit to 2
   const filteredSimilarJobs = similarJobs?.filter(j => j.id !== jobId).slice(0, 2);
-  
+
   // Apply to job mutation
   const applyMutation = useMutation({
     mutationFn: async () => {
@@ -82,7 +82,7 @@ export default function JobDetail() {
       queryClient.invalidateQueries({ queryKey: ["/api/job-seeker/applications"] });
     },
   });
-  
+
   // Save job mutation
   const saveJobMutation = useMutation({
     mutationFn: async () => {
@@ -100,25 +100,25 @@ export default function JobDetail() {
       queryClient.invalidateQueries({ queryKey: ["/api/job-seeker/saved-jobs"] });
     },
   });
-  
+
   // Audio description for the job details
   const generateAudioDescription = (job: JobWithEmployer) => {
     return `${t("jobSeeker.jobDetail.audioIntro")}: ${job.title}. ${t("jobSeeker.jobDetail.company")}: ${job.employer.employerProfile?.companyName || job.employer.firstName + ' ' + job.employer.lastName}. ${t("jobSeeker.jobDetail.location")}: ${job.location}. ${t("jobSeeker.jobDetail.type")}: ${t(`jobTypes.${job.type}`)}. ${t("jobSeeker.jobDetail.descriptionLabel")}: ${job.description}`;
   };
-  
+
   // WhatsApp deep link
   const generateWhatsAppLink = (job: JobWithEmployer) => {
     const phone = job.contactPhone.replace(/\D/g, '');
     const message = t("jobSeeker.jobDetail.whatsappMessage", { jobTitle: job.title });
     return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   };
-  
+
   // Phone call link
   const generatePhoneLink = (job: JobWithEmployer) => {
     const phone = job.contactPhone.replace(/\D/g, '');
     return `tel:${phone}`;
   };
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-muted">
@@ -127,7 +127,7 @@ export default function JobDetail() {
       </div>
     );
   }
-  
+
   if (error || !job) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-muted">
@@ -139,22 +139,22 @@ export default function JobDetail() {
       </div>
     );
   }
-  
+
   const jobAudioDescription = generateAudioDescription(job);
   const whatsappLink = generateWhatsAppLink(job);
   const phoneLink = generatePhoneLink(job);
-  
+
   return (
     <div className="min-h-screen flex flex-col bg-muted">
       <Header />
-      
+
       {/* Back Button */}
       <div className="container mx-auto px-4 py-3">
         <Link href="/job-seeker/search" className="inline-flex items-center text-muted-foreground hover:text-primary transition">
           <ArrowLeft className="h-4 w-4 mr-1" /> {t("common.backToResults")}
         </Link>
       </div>
-      
+
       {/* Job Detail */}
       <main className="container mx-auto px-4 pb-24 flex-grow">
         <Card className="mb-6">
@@ -191,7 +191,7 @@ export default function JobDetail() {
                 </Button>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div className="bg-muted rounded-lg p-3 flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
@@ -202,7 +202,7 @@ export default function JobDetail() {
                   <p className="font-medium text-foreground">{job.location}</p>
                 </div>
               </div>
-              
+
               <div className="bg-muted rounded-lg p-3 flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
                   <Clock className="h-5 w-5" />
@@ -212,7 +212,7 @@ export default function JobDetail() {
                   <p className="font-medium text-foreground">{t(`jobTypes.${job.type}`)}</p>
                 </div>
               </div>
-              
+
               <div className="bg-muted rounded-lg p-3 flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
                   <Calendar className="h-5 w-5" />
@@ -225,7 +225,7 @@ export default function JobDetail() {
                 </div>
               </div>
             </div>
-            
+
             <div className="mb-6">
               <h2 className="text-lg font-semibold text-foreground mb-3">{t("jobSeeker.jobDetail.description")}</h2>
               <p className="text-muted-foreground mb-3">
@@ -237,7 +237,7 @@ export default function JobDetail() {
                 ))}
               </ul>
             </div>
-            
+
             <div className="mb-6">
               <h2 className="text-lg font-semibold text-foreground mb-3">{t("jobSeeker.jobDetail.aboutEmployer")}</h2>
               <div className="flex items-start gap-3">
@@ -266,7 +266,7 @@ export default function JobDetail() {
                 </div>
               </div>
             </div>
-            
+
             {/* Contact Section */}
             <div>
               <h2 className="text-lg font-semibold text-foreground mb-3">{t("jobSeeker.jobDetail.interestedCta")}</h2>
@@ -309,7 +309,7 @@ export default function JobDetail() {
             </div>
           </CardContent>
         </Card>
-        
+
         {/* Similar Jobs */}
         <Card>
           <CardContent className="p-6">
@@ -319,7 +319,7 @@ export default function JobDetail() {
                 {t("common.viewMore")} <ArrowLeft className="h-4 w-4 rotate-180" />
               </Link>
             </div>
-            
+
             <div className="space-y-4">
               {isSimilarJobsLoading ? (
                 <div className="flex justify-center py-8">
@@ -338,9 +338,9 @@ export default function JobDetail() {
           </CardContent>
         </Card>
       </main>
-      
+
       <MobileNavbar />
-      
+
       <Footer />
     </div>
   );
