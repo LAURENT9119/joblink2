@@ -202,6 +202,31 @@ const translations = {
       },
     applications: {
       title: "My Applications",
+    },
+    employer: {
+      createJob: {
+        title: "Post a New Job",
+        subtitle: "Create a new job posting to find the right candidate",
+        audioDescription: "This is the job posting page where you can create a new job listing. Fill in the details about the position you're offering.",
+        jobTitle: "Job Title",
+        jobTitlePlaceholder: "e.g. Sales Associate",
+        description: "Job Description",
+        descriptionPlaceholder: "Describe the role, responsibilities, and requirements",
+        sector: "Sector",
+        location: "Location",
+        locationPlaceholder: "Where is this job located?",
+        salary: "Salary",
+        salaryPlaceholder: "Monthly salary in CFA",
+        submit: "Post Job"
+      }
+    },
+    sectors: {
+      retail: "Retail",
+      hospitality: "Hospitality",
+      construction: "Construction",
+      manufacturing: "Manufacturing",
+      other: "Other"
+    },
       subtitle: "Track the status of your job applications",
       audioDescription: "This is your applications page. Here you can see all the jobs you have applied for and their current status.",
       noApplications: "No applications yet",
