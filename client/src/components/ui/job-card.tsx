@@ -74,8 +74,8 @@ export function JobCard({ job, isSaved = false, isDetailed = false }: JobCardPro
       </div>
 
       <p className="text-muted-foreground text-sm mb-3">
-        {isDetailed ? job.description : `${job.description.substring(0, 100)}${job.description.length > 100 ? '...' : ''}`}
-      </p>
+          {isDetailed ? (job.description || '') : job.description ? `${job.description.substring(0, 100)}${job.description.length > 100 ? '...' : ''}` : ''}
+        </p>
 
       <div className="flex flex-wrap gap-2 mb-3">
         <Badge variant="outline" className="text-xs text-muted-foreground">
