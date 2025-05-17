@@ -1,0 +1,72 @@
+Re-optimizing dependencies because lockfile has changed
+8:00:42 PM [express] serving on port 5000
+Test users and data seeded successfully!
+Error:   Failed to scan for dependencies from entries:
+  /home/runner/workspace/client/index.html
+
+  ✘ [ERROR] The constant "employer" must be initialized
+
+    client/src/locales/en.ts:349:2:
+      349 │   employer: {
+          ╵   ~~~~~~~~
+
+
+✘ [ERROR] The constant "contact" must be initialized
+
+    client/src/locales/en.ts:435:2:
+      435 │   contact: {
+          ╵   ~~~~~~~
+
+
+✘ [ERROR] The constant "profile" must be initialized
+
+    client/src/locales/en.ts:444:2:
+      444 │   profile: {
+          ╵   ~~~~~~~
+
+
+✘ [ERROR] The constant "jobs" must be initialized
+
+    client/src/locales/en.ts:461:2:
+      461 │   jobs: {
+          ╵   ~~~~
+
+
+✘ [ERROR] The constant "jobTypes" must be initialized
+
+    client/src/locales/en.ts:475:2:
+      475 │   jobTypes: {
+          ╵   ~~~~~~~~
+
+
+✘ [ERROR] The constant "sectors" must be initialized
+
+    client/src/locales/en.ts:482:2:
+      482 │   sectors: {
+          ╵   ~~~~~~~
+
+
+✘ [ERROR] The constant "skills" must be initialized
+
+    client/src/locales/en.ts:497:2:
+      497 │   skills: {
+          ╵   ~~~~~~
+
+
+✘ [ERROR] Unexpected "}"
+
+    client/src/locales/en.ts:511:0:
+      511 │ };
+          ╵ ^
+
+
+    at failureErrorWithLog (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:1472:15)
+    at /home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:945:25
+    at runOnEndCallbacks (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:1315:45)
+    at buildResponseToResult (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:943:7)
+    at /home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:955:9
+    at new Promise (<anonymous>)
+    at requestCallbacks.on-end (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:954:54)
+    at handleRequest (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:647:17)
+    at handleIncomingPacket (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:672:7)
+    at Socket.readFromStdout (/home/runner/workspace/node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
