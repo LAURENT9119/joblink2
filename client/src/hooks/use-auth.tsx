@@ -43,9 +43,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       // Redirect based on user role
       if (user.role === "job_seeker") {
-        setLocation("/job-seeker/dashboard");
+        window.location.href = "/job-seeker/dashboard";
       } else if (user.role === "employer") {
-        setLocation("/employer/dashboard");
+        window.location.href = "/employer/dashboard";
       }
       
       toast({
