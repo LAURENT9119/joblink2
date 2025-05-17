@@ -62,7 +62,7 @@ export function JobCard({ job, isSaved = false, isDetailed = false }: JobCardPro
   const audioDescription = `${t("jobs.job")}: ${job.title}. ${t("jobs.location")}: ${job.location}. ${t("jobs.type")}: ${job.type}. ${t("jobs.description")}: ${job.description}`;
 
   // Phone call link
-  const phoneLink = job.contactPhone ? `tel:${job.contactPhone.replace(/\D/g, '')}` : '#';
+  const phoneLink = '#';
 
   return (
     <div className={`border ${isDetailed ? 'border-primary' : 'border-border'} rounded-lg p-4 hover:border-primary hover:shadow-sm transition`}>
@@ -74,8 +74,8 @@ export function JobCard({ job, isSaved = false, isDetailed = false }: JobCardPro
       </div>
 
       <p className="text-muted-foreground text-sm mb-3">
-          {isDetailed ? (job.description || '') : job.description ? `${job.description.substring(0, 100)}${job.description.length > 100 ? '...' : ''}` : ''}
-        </p>
+        {job.description || 'No description available'}
+      </p>
 
       <div className="flex flex-wrap gap-2 mb-3">
         <Badge variant="outline" className="text-xs text-muted-foreground">
