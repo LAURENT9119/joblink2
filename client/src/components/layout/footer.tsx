@@ -8,7 +8,7 @@ import {
 export function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-primary-950 text-white py-8">
       <div className="container mx-auto px-4">
@@ -22,10 +22,10 @@ export function Footer() {
               {t("footer.tagline")}
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">{t("footer.quickLinks")}</h4>
-            <ul className="space-y-2 text-primary-200">
+            <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="/" className="hover:text-white transition">
                   {t("navigation.home")}
@@ -48,10 +48,10 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">{t("footer.support")}</h4>
-            <ul className="space-y-2 text-primary-200">
+            <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="/help" className="hover:text-white transition">
                   {t("footer.help")}
@@ -79,7 +79,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">{t("footer.followUs")}</h4>
             <div className="flex space-x-4">
@@ -99,7 +99,7 @@ export function Footer() {
                 </svg>
               </a>
             </div>
-            
+
             <div className="mt-4 space-y-2 text-sm text-neutral-light">
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-2" />
@@ -116,7 +116,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-neutral-dark mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-neutral-light text-sm mb-4 md:mb-0">
             &copy; {currentYear} JobLink. {t("footer.allRightsReserved")}
