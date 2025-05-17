@@ -62,7 +62,7 @@ export function JobCard({ job, isSaved = false, isDetailed = false }: JobCardPro
   const audioDescription = `${t("jobs.job")}: ${job.title}. ${t("jobs.location")}: ${job.location}. ${t("jobs.type")}: ${job.type}. ${t("jobs.description")}: ${job.description}`;
 
   // Phone call link
-  const phoneLink = `tel:${job.contactPhone.replace(/\D/g, '')}`;
+  const phoneLink = job.contactPhone ? `tel:${job.contactPhone.replace(/\D/g, '')}` : '#';
 
   return (
     <div className={`border ${isDetailed ? 'border-primary' : 'border-border'} rounded-lg p-4 hover:border-primary hover:shadow-sm transition`}>
