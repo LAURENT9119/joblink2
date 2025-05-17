@@ -8,11 +8,27 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState({ 
+    id: 1, 
+    role: 'job_seeker',
+    firstName: 'Test',
+    lastName: 'User',
+    email: 'test@example.com',
+    phone: '+221777777777',
+    preferredLanguage: 'fr'
+  });
+
+  const logout = () => {
+    setUser(null);
+    window.location.href = '/';
+  };
+
   return (
     <AuthContext.Provider
       value={{
-        user: { id: 1, role: 'job_seeker' },
+        user,
         isLoading: false,
+        logout
       }}
     >
       {children}

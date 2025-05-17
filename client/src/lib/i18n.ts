@@ -17,8 +17,10 @@ export const defaultLanguage: Language = "fr";
 
 export const supportedLanguages = [
   { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "en", name: "English", flag: "🇬🇧" },
+  { code: "en", name: "English", flag: "🇬🇧" }
 ] as const;
+
+export type Language = "fr" | "en";
 
 export interface I18nContextType {
   language: Language;

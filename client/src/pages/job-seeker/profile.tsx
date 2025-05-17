@@ -124,14 +124,45 @@ export default function JobSeekerProfile() {
                     />
                   </div>
 
-                  <div className="grid gap-2">
-                    <Label>{t("jobSeeker.profile.age")}</Label>
-                    <Input 
-                      type="number"
-                      placeholder={t("jobSeeker.profile.agePlaceholder")}
-                      value={profile?.age || ""}
-                      onChange={(e) => updateProfileMutation.mutate({ age: parseInt(e.target.value) })}
-                    />
+                  <div className="space-y-4">
+                    <div className="grid gap-2">
+                      <Label>{t("jobSeeker.profile.age")}</Label>
+                      <Input 
+                        type="number"
+                        placeholder={t("jobSeeker.profile.agePlaceholder")}
+                        value={profile?.age || ""}
+                        onChange={(e) => updateProfileMutation.mutate({ age: parseInt(e.target.value) })}
+                      />
+                    </div>
+
+                    <div className="grid gap-2">
+                      <Label>{t("auth.phone")}</Label>
+                      <Input 
+                        type="tel"
+                        placeholder={t("auth.phonePlaceholder")}
+                        value={profile?.phone || ""}
+                        onChange={(e) => updateProfileMutation.mutate({ phone: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="grid gap-2">
+                      <Label>{t("auth.email")}</Label>
+                      <Input 
+                        type="email"
+                        placeholder={t("auth.emailPlaceholder")}
+                        value={profile?.email || ""}
+                        onChange={(e) => updateProfileMutation.mutate({ email: e.target.value })}
+                      />
+                    </div>
+
+                    <div className="grid gap-2">
+                      <Label>{t("jobSeeker.profile.education")}</Label>
+                      <Textarea 
+                        placeholder={t("jobSeeker.profile.educationPlaceholder")}
+                        value={profile?.education || ""}
+                        onChange={(e) => updateProfileMutation.mutate({ education: e.target.value })}
+                      />
+                    </div>
                   </div>
                 </div>
               </CardContent>
