@@ -174,6 +174,32 @@ const translations = {
     allRightsReserved: "All rights reserved."
   },
   jobSeeker: {
+      profile: {
+        title: "My Profile",
+        subtitle: "Complete your profile to increase your chances of finding a job",
+        audioDescription: "This is your profile page. Here you can add your personal information, skills, and record an audio presentation to introduce yourself to employers.",
+        personalInfo: "Personal Information",
+        personalInfoDesc: "Basic information about you",
+        location: "Location",
+        locationPlaceholder: "Your city or neighborhood",
+        age: "Age",
+        agePlaceholder: "Your age",
+        professionalInfo: "Professional Information",
+        professionalInfoDesc: "Your skills and experience",
+        desiredSectors: "Desired Sectors",
+        selectSector: "Select a sector",
+        skills: "Skills",
+        skillsPlaceholder: "Enter a skill",
+        commonSkills: "Common skills",
+        experience: "Experience",
+        experiencePlaceholder: "Briefly describe your professional experiences",
+        audioPresentation: "Audio Presentation",
+        audioPresentationDesc: "Record a message to introduce yourself",
+        audioPresentationTip: "Briefly introduce yourself, talk about your skills and experience",
+        startRecording: "Start recording",
+        stopRecording: "Stop recording",
+        audioNotSupported: "Your browser does not support audio playback"
+      },
     savedJobs: {
       title: "Saved Jobs",
       subtitle: "View and manage your saved job opportunities",
