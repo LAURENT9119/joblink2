@@ -174,6 +174,14 @@ const translations = {
     allRightsReserved: "All rights reserved."
   },
   jobSeeker: {
+    savedJobs: {
+      title: "Saved Jobs",
+      subtitle: "View and manage your saved job opportunities",
+      audioDescription: "This is your saved jobs page. Here you can find all the jobs you've bookmarked for later.",
+      noSavedJobs: "No saved jobs yet",
+      startSaving: "Start saving jobs you're interested in to apply later",
+      browseJobs: "Browse Jobs"
+    },
     dashboard: {
       hello: "Hello, {name}!",
       welcome: "Welcome to your dashboard. What would you like to do today?",
