@@ -21,6 +21,7 @@ import {
 
 export default function JobDetail() {
   const { t } = useTranslation();
+  const [, navigate] = useLocation();
   const { user } = useAuth();
   const [, params] = useRoute<{ id: string }>("/job-seeker/job/:id");
 

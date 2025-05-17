@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
@@ -16,7 +15,7 @@ import { Loader2, ClipboardList } from "lucide-react";
 export default function Applications() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  
+
   // Get applications
   const { 
     data: applications, 
@@ -25,14 +24,14 @@ export default function Applications() {
     queryKey: ["/api/job-seeker/applications"],
     enabled: !!user,
   });
-  
+
   // Audio description
   const pageAudioDescription = t("jobSeeker.applications.audioDescription");
-  
+
   return (
     <div className="min-h-screen flex flex-col bg-muted">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-6 flex-grow pb-20 md:pb-6">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -45,7 +44,7 @@ export default function Applications() {
           </div>
           <AudioButton text={pageAudioDescription} />
         </div>
-        
+
         <Card>
           <CardContent className="p-6">
             {isLoading ? (
@@ -82,9 +81,9 @@ export default function Applications() {
           </CardContent>
         </Card>
       </main>
-      
+
       <MobileNavbar />
-      
+
       <Footer />
     </div>
   );
