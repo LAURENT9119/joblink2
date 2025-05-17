@@ -208,5 +208,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Create HTTP server
   const httpServer = createServer(app);
+  // CV Generation endpoint
+  app.get("/api/job-seeker/cv", async (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    if (req.user!.role !== "job_seeker") return res.status(403).send("Not authorized");
+    
+    try {
+      const profile = await storage.getJobSeekerProfile(req.user!.id);
+      const pdfBuffer = await generateCV(profile);
+      
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename=cv.pdf');
+      res.send(pdfBuffer);
+    } catch (error) {
+      res.status(500).json({ message: "Error generating CV" });
+    }
+  });
+
+  // Admin routes
+  app.get("/api/admin/users", async (req, res) => {
+    if (!req.isAuthenticated() || req.user!.role !== "admin") {
+      return res.status(403).send("Not authorized");
+    }
+    const users = await storage.getAllUsers();
+    res.json(users);
+  });
+
+  app.get("/api/admin/jobs", async (req, res) => {
+    if (!req.isAuthenticated() || req.user!.role !== "admin") {
+      return res.status(403).send("Not authorized");
+    }
+    const jobs = await storage.getAllJobs();
+    res.json(jobs);
+  });
+
   return httpServer;
 }

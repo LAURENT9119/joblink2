@@ -22,7 +22,7 @@ import Contact from "@/pages/contact";
 import Terms from "@/pages/terms";
 import Privacy from "@/pages/privacy";
 import ResetPassword from "@/pages/reset-password";
-import HelpPage from "@/pages/help-page";
+import HelpPage from "@/pages/help";
 
 function App() {
   return (
