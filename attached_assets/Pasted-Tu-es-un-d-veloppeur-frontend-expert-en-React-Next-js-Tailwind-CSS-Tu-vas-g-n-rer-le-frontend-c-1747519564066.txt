@@ -1,0 +1,37 @@
+Tu es un développeur frontend expert en React / Next.js / Tailwind CSS. Tu vas générer le frontend complet de mon application mobile-first appelée JobLink.
+Voici les règles et objectifs à suivre à la lettre pour multiplier ta productivité par 10 :
+🎯 Objectif de l'application : Créer une plateforme inclusive d'emploi local pour connecter :
+Des chercheurs d’emploi (étudiants, artisans, femmes, jeunes…)
+Des proposeurs d’offres (entreprises, commerçants, ONG, particuliers)
+🧱 Stack frontend imposée : Next.js (avec App Router ou Pages Router)
+React (modulaire, composants réutilisables)
+Tailwind CSS (pour une UI moderne et rapide)
+i18n (internationalisation avec français + langues locales)
+Responsive mobile-first (priorité smartphone)
+Prise en charge du dark mode
+Accessibilité (facile à lire, police lisible, boutons larges)
+📄 Pages à créer : Accueil – Présentation de la plateforme + Call to Action
+Connexion / Inscription – Par email, avec interface claire
+Créer un profil candidat – Nom, domaine, localisation, compétences
+Créer un profil recruteur – Nom, entreprise, ville, numéro
+Liste des offres – Filtres (secteur, ville, type de contrat)
+Créer une offre – Formulaire simple et rapide
+Détail d’une offre – Description + bouton de contact (WhatsApp ou téléphone)
+Tableau de bord utilisateur – Offres postées, suivis, candidatures
+Fiches métiers – Listes guidées de métiers avec icônes
+Multilingue – Bouton de changement de langue (FR / EN)
+Footer + Header universels – Avec navigation simplifiée
+🧠 Consignes intelligentes : Chaque page doit être un composant isolé dans /app ou /pages
+Utilise Tailwind CSS intelligemment (pas de surcharge inutile)
+Code clair et commenté
+Génère des composants réutilisables : Button, Input, Card, JobList, JobItem, LanguageSwitcher, ProfileForm, JobForm, etc.
+Utilise next-i18next ou autre pour les traductions
+Le code doit être prêt à brancher à Supabase
+Propose en fin des instructions pour lancer le projet localement
+Prends en compte l’intégration d’une API WhatsApp ou téléphone au frontend (boutons dynamiques)
+📦 Donne-moi en sortie : Le code complet de chaque fichier frontend (pages, composants, layout)
+La structure du dossier Next.js
+Une maquette visuelle sommaire (optionnelle)
+Les commandes npm/yarn à exécuter
+Un exemple de traduction (fichier fr.json / en.json)
+⚠️ Ne saute aucune page. Génère tout le frontend prêt à l’emploi. Si besoin, découpe la réponse en plusieurs parties.
